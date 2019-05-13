@@ -39,6 +39,9 @@ public class CustomerTest extends BaseClass{
 		  String actsussMsg = pac.getSuccessMsg().getText();
 		  boolean status = actsussMsg.contains("successfully created");
 		  Assert.assertTrue(status);	
+		  
+		  
+		  
 	}
 	
 	@Test
