@@ -24,19 +24,25 @@ public class BaseClass {
 	
 	@BeforeSuite
 	public void configBeforeSuite() {
+		/*Class.forName("com.mysql.jdbc.Driver");
+		DriverManager.getConnection("jdbc:mysql://localhost:8080/Employee","root","root"); 
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:8080/Employee","root","root");
+		con.createStatement();
+		Statement st= con.createStatement();
+		st.executeQuery("Select * from Employee where name='myname'");*/
 		System.out.println("connect to data base");
 	}
-
+	
 	@BeforeClass
 	public void configBC() throws Throwable {
 		System.out.println("=========launch a browser=========");
-		
+
 		String BROWSER = flib.getPropertyKeyValue("browser");
-		if(BROWSER.equals("firefox")) {
-				driver = new FirefoxDriver();
-		}else if(BROWSER.equals("chrome")) {
-			   driver = new ChromeDriver();
-		}	
+		if (BROWSER.equals("firefox")) {
+			driver = new FirefoxDriver();
+		} else if (BROWSER.equals("chrome")) {
+			driver = new ChromeDriver();
+		}
 		driver.manage().window().maximize();
 	}
 
@@ -45,12 +51,12 @@ public class BaseClass {
 		System.out.println("login");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get(flib.getPropertyKeyValue("url"));
-		
+
 		Login lp = PageFactory.initElements(driver, Login.class);
 		lp.loginToAPP();
 		Thread.sleep(2000);
 	}
-	
+
 	@AfterMethod
 	public void configAM() {
 		System.out.println("logout");
@@ -63,7 +69,5 @@ public class BaseClass {
 		System.out.println("========close the BRowser=========");
 		driver.close();
 	}
-
-
 
 }
